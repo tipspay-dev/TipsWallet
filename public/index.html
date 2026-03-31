@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TipsWallet</title>
+    <meta
+      name="description"
+      content="Premium TipsWallet interface for the TipsPay ecosystem with wallet connect, name-based sending, and gasless-ready transfer flows."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="page-glow page-glow-left" aria-hidden="true"></div>
+      <div class="page-glow page-glow-right" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark">TW</div>
+          <div>
+            <p class="eyebrow">Wallet-only deployment</p>
+            <h1>TipsWallet</h1>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button id="add-network-button" class="ghost-button" type="button">Add TipsPay</button>
+          <button id="connect-button" class="primary-button" type="button">Connect Wallet</button>
+        </div>
+      </header>
+
+      <main class="layout-grid">
+        <section class="hero-card panel reveal">
+          <div class="hero-copy">
+            <p class="eyebrow">MetaMask-like premium flow</p>
+            <h2>Wallet to wallet transfers with `.tip` names and gasless-ready rails.</h2>
+            <p class="lede">
+              This app is packaged for standalone deployment on Spaceship. Connect your browser wallet, switch to
+              TipsPay, view live balances, and route direct or relay-assisted transfers from one place.
+            </p>
+          </div>
+
+          <div class="hero-meta">
+            <span id="network-pill" class="status-pill">Loading network</span>
+            <span id="account-pill" class="status-pill status-pill-muted">No wallet</span>
+          </div>
+        </section>
+
+        <section class="portfolio-card panel reveal">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Portfolio</p>
+              <h3>Live wallet balances</h3>
+            </div>
+            <button id="refresh-button" class="ghost-button" type="button">Refresh</button>
+          </div>
+
+          <div class="balance-grid">
+            <article class="balance-card">
+              <span class="balance-label">Native</span>
+              <strong id="native-balance">-</strong>
+              <span id="native-symbol">TPC</span>
+            </article>
+            <article class="balance-card">
+              <span class="balance-label">Stable</span>
+              <strong id="stable-balance">-</strong>
+              <span id="stable-symbol">USDT</span>
+            </article>
+            <article class="balance-card">
+              <span class="balance-label">Wrapped</span>
+              <strong id="wrapped-balance">-</strong>
+              <span id="wrapped-symbol">WTPC</span>
+            </article>
+          </div>
+
+          <div class="account-meta">
+            <div>
+              <span class="meta-label">Connected address</span>
+              <strong id="account-address">Not connected</strong>
+            </div>
+            <div>
+              <span class="meta-label">Wallet status</span>
+              <strong id="wallet-status">Waiting for wallet connection</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="transfer-card panel reveal">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Send</p>
+              <h3>Direct or gasless transfer</h3>
+            </div>
+          </div>
+
+          <form id="transfer-form" class="transfer-form">
+            <label class="field">
+              <span class="field-label">Recipient</span>
+              <input
+                id="recipient-input"
+                type="text"
+                autocomplete="off"
+                placeholder="username.tip or 0x..."
+              />
+            </label>
+
+            <div class="field-row">
+              <label class="field">
+                <span class="field-label">Asset</span>
+                <select id="asset-select"></select>
+              </label>
+
+              <label class="field">
+                <span class="field-label">Mode</span>
+                <select id="mode-select">
+                  <option value="direct">Direct</option>
+                  <option value="gasless">Gasless</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="field-label">Amount</span>
+              <input id="amount-input" type="number" min="0" step="any" placeholder="0.0" />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Note</span>
+              <input id="memo-input" type="text" maxlength="140" placeholder="Optional memo for your relay or logs" />
+            </label>
+
+            <div class="preview-box">
+              <span class="meta-label">Resolution preview</span>
+              <strong id="resolution-preview">Recipient not resolved yet.</strong>
+            </div>
+
+            <button id="submit-button" class="primary-button submit-button" type="submit">Send transfer</button>
+          </form>
+
+          <p id="transfer-status" class="helper-copy">Gasless mode activates when a relay URL is configured.</p>
+        </section>
+
+        <section class="services-card panel reveal">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Services</p>
+              <h3>Runtime configuration</h3>
+            </div>
+          </div>
+
+          <dl class="service-list">
+            <div>
+              <dt>RPC</dt>
+              <dd id="rpc-url">-</dd>
+            </div>
+            <div>
+              <dt>Explorer</dt>
+              <dd id="explorer-url">-</dd>
+            </div>
+            <div>
+              <dt>Name service</dt>
+              <dd id="name-service-address">Not configured</dd>
+            </div>
+            <div>
+              <dt>Relayer</dt>
+              <dd id="relayer-url">Not configured</dd>
+            </div>
+            <div>
+              <dt>Stable token</dt>
+              <dd id="stable-token-address">Not configured</dd>
+            </div>
+            <div>
+              <dt>Price oracle</dt>
+              <dd id="price-oracle-address">Not configured</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="activity-card panel reveal">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Activity</p>
+              <h3>Recent wallet actions</h3>
+            </div>
+          </div>
+
+          <ul id="activity-list" class="activity-list">
+            <li class="empty-state">Connect a wallet to load activity.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
