@@ -1,0 +1,13 @@
+{
+  "name": "tipswallet-spaceship",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wallet-only TipsWallet app ready for Spaceship Hyperlift or Spaceship Web Hosting.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
