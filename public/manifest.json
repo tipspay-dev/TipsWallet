@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "TipsWallet Extension",
+  "version": "1.0.0",
+  "description": "Advanced Web3 Crypto Wallet & DEX for the TipsChain ecosystem.",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "favicon.ico",
+      "48": "favicon.ico",
+      "128": "favicon.ico"
+    }
+  },
+  "permissions": ["storage", "activeTab"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
