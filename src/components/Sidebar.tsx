@@ -106,7 +106,14 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           </div>
         </div>
         
-        <Button variant="ghost" className="w-full justify-start gap-4 text-muted-foreground hover:text-red-400 hover:bg-red-400/10">
+        <Button 
+          variant="ghost" 
+          onClick={() => {
+            localStorage.removeItem('tipspay_onboarded');
+            window.location.reload();
+          }}
+          className="w-full justify-start gap-4 text-muted-foreground hover:text-red-400 hover:bg-red-400/10"
+        >
           <LogOut className="w-6 h-6 shrink-0" />
           <span className="hidden md:block">Lock Wallet</span>
         </Button>

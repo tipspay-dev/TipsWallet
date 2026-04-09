@@ -4,26 +4,90 @@
  */
 
 import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import SplashScreen from './components/SplashScreen';
 import WalletDashboard from './components/WalletDashboard';
 import DEX from './components/DEX';
 import Market from './components/Market';
 import Sidebar from './components/Sidebar';
+import LandingPage from './components/LandingPage';
+import Onboarding from './components/Onboarding';
 import { ThemeProvider } from './components/ThemeProvider';
 
+type AppView = 'landing' | 'onboarding' | 'loading' | 'main';
+
 export default function App() {
-  const [loading, setLoading] = useState(true);
+  const [view, setView] = useState<AppView>('landing');
   const [activeTab, setActiveTab] = useState('wallet');
+
+  // Check if already onboarded (simulated)
+  useEffect(() => {
+    const onboarded = localStorage.getItem('tipspay_onboarded');
+    if (onboarded) {
+      setView('loading');
+    }
+  }, []);
+
+  const handleEnter = () => {
+    setView('onboarding');
+  };
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem('tipspay_onboarded', 'true');
+    setView('loading');
+  };
+
+  const handleSplashComplete = () => {
+    setView('main');
+  };
 
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
         <AnimatePresence mode="wait">
-          {loading ? (
-            <SplashScreen onComplete={() => setLoading(false)} />
-          ) : (
-            <div key="main" className="flex h-screen overflow-hidden">
+          {view === 'landing' && (
+            <motion.div 
+              key="landing"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full"
+            >
+              <LandingPage onEnter={handleEnter} />
+            </motion.div>
+          )}
+
+          {view === 'onboarding' && (
+            <motion.div 
+              key="onboarding"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full"
+            >
+              <Onboarding onComplete={handleOnboardingComplete} />
+            </motion.div>
+          )}
+
+          {view === 'loading' && (
+            <motion.div 
+              key="loading"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full"
+            >
+              <SplashScreen onComplete={handleSplashComplete} />
+            </motion.div>
+          )}
+
+          {view === 'main' && (
+            <motion.div 
+              key="main" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex h-screen overflow-hidden w-full"
+            >
               <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
               
               <main className="flex-1 overflow-y-auto relative">
@@ -35,7 +99,7 @@ export default function App() {
                   </AnimatePresence>
                 </div>
               </main>
-            </div>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
