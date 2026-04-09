@@ -9,7 +9,6 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tailwindcss()],
     define: {
-      // Gemini API anahtarını client-side'da kullanılabilir hale getirir
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
     resolve: {
@@ -18,16 +17,15 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      // Geliştirme aşaması için ayarlar
       port: 3000,
       host: '0.0.0.0',
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     preview: {
-      // Hyperlift prodüksiyon (preview) aşaması için kritik ayarlar
+      // Hyperlift prodüksiyon ortamı ayarları
       port: 8080,
       host: '0.0.0.0',
-      allowedHosts: true // Bazı platformlarda host kontrolünü aşmak için gerekir
+      allowedHosts: true
     },
     build: {
       outDir: 'dist',
