@@ -243,7 +243,7 @@ export default function DEX() {
             <div className="bg-white/5 rounded-2xl p-4 space-y-3 border border-white/5 hover:border-primary/30 transition-colors">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground font-medium">From</span>
-                <span className="text-sm text-muted-foreground">Balance: 1,250.00</span>
+                <span className="text-sm text-muted-foreground">Balance: 0.00</span>
               </div>
               <div className="flex items-center gap-4">
                 <Input 

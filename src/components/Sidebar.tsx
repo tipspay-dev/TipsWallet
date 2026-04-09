@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Wallet, 
   ArrowLeftRight, 
@@ -89,10 +89,29 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           </button>
           <button 
             onClick={toggleTheme}
-            className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-muted-foreground hover:bg-white/5 hover:text-white transition-all"
+            className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-muted-foreground hover:bg-white/5 hover:text-white transition-all group"
           >
-            {theme === 'dark' ? <Sun className="w-6 h-6 shrink-0" /> : <Moon className="w-6 h-6 shrink-0" />}
-            <span className="hidden md:block font-medium">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+            <div className="relative w-6 h-6 shrink-0 overflow-hidden">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={theme}
+                  initial={{ y: 20, opacity: 0, rotate: -45 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={{ y: -20, opacity: 0, rotate: 45 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="w-6 h-6 text-yellow-400" />
+                  ) : (
+                    <Moon className="w-6 h-6 text-primary" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <span className="hidden md:block font-medium transition-colors group-hover:text-white">
+              {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </span>
           </button>
         </div>
       </nav>

@@ -26,9 +26,9 @@ import { useTransactions, Transaction } from '../context/TransactionContext';
 import { TPCCoin, USDTCoin, WTPCCoin, TetherCoin } from './Icons';
 
 const mockTokens: Token[] = [
-  { id: '1', symbol: 'TPC', name: 'Tipscoin', balance: 1250.00, price: 0.45, change24h: 5.2, icon: 'tpc', color: 'primary' },
-  { id: '2', symbol: 'WTPC', name: 'Wrapped TPC', balance: 0, price: 0.45, change24h: 0, icon: 'wtpc', color: 'purple-400' },
-  { id: '3', symbol: 'USDTC', name: 'USDTips', balance: 500.00, price: 1.00, change24h: 0, icon: 'usdc', color: 'green-500' },
+  { id: '1', symbol: 'TPC', name: 'Tipscoin', balance: 0, price: 0, change24h: 0, icon: 'tpc', color: 'primary' },
+  { id: '2', symbol: 'WTPC', name: 'Wrapped TPC', balance: 0, price: 0, change24h: 0, icon: 'wtpc', color: 'purple-400' },
+  { id: '3', symbol: 'USDTC', name: 'USDTips', balance: 0, price: 0, change24h: 0, icon: 'usdc', color: 'green-500' },
 ];
 
 const TokenIcon = ({ symbol }: { symbol: string }) => {
@@ -104,7 +104,7 @@ export default function WalletDashboard() {
           <div className="flex items-baseline gap-3">
             <span className="text-5xl font-bold tracking-tighter">${totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             <Badge variant="outline" className="bg-secondary/10 text-secondary border-secondary/20 neon-text-green">
-              +5.2% Today
+              0% Today
             </Badge>
           </div>
           <a 
