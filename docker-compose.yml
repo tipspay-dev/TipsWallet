@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  tipswallet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tipswallet-app
+    ports:
+      - "${DOCKER_PORT:-3000}:3000"
+    restart: unless-stopped
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Resource constraints
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    
+    # Optional: Add environment variables here
+    # environment:
+    #   - NODE_ENV=production
+    #   - REACT_APP_API_URL=http://api.example.com
+    
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Optional: Add reverse proxy service
+# services:
+#   nginx-proxy:
+#     image: nginx:alpine
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - ./nginx-proxy.conf:/etc/nginx/conf.d/default.conf
+#     depends_on:
+#       - tipswallet
