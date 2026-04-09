@@ -5,7 +5,7 @@ interface SplashScreenProps {
   onComplete: () => void;
 }
 
-import { TipsPayWalletLogo } from './Icons';
+import { TipspayWalletLogo } from './Icons';
 
 export default function SplashScreen({ onComplete }: SplashScreenProps) {
   return (
@@ -49,7 +49,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
           }}
           className="w-48 h-auto mb-8"
         >
-          <TipsPayWalletLogo className="text-white" />
+          <TipspayWalletLogo className="text-white" />
         </motion.div>
 
         <motion.h1

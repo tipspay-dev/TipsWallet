@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { TipsPayWalletLogo } from './Icons';
+import { TipspayWalletLogo } from './Icons';
 
 interface OnboardingProps {
   onComplete: () => void;
@@ -48,12 +48,12 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
             className="w-full max-w-md space-y-8 text-center"
           >
             <div className="flex justify-center mb-8">
-              <TipsPayWalletLogo className="h-16 w-auto text-foreground" />
+              <TipspayWalletLogo className="h-16 w-auto text-foreground" />
             </div>
             
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold text-white">Welcome to TipsPay</h1>
-              <p className="text-muted-foreground">The most secure way to explore TipsChain</p>
+              <h1 className="text-3xl font-bold text-white">Welcome to Tipspay</h1>
+              <p className="text-muted-foreground">The most secure way to explore Tipschain</p>
             </div>
 
             <div className="grid gap-4">
@@ -137,7 +137,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
               <p className="text-xs text-red-200 leading-relaxed">
                 Never share your recovery phrase with anyone. Anyone with this phrase can steal your funds. 
-                TipsPay support will NEVER ask for this phrase.
+                Tipspay support will NEVER ask for this phrase.
               </p>
             </div>
           </motion.div>
@@ -156,7 +156,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
             
             <div className="space-y-2">
               <h1 className="text-3xl font-bold text-white">Wallet Secured!</h1>
-              <p className="text-muted-foreground">Your TipsPay wallet is ready to use. Welcome to the ecosystem.</p>
+              <p className="text-muted-foreground">Your Tipspay wallet is ready to use. Welcome to the ecosystem.</p>
             </div>
 
             <Button 

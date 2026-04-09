@@ -21,24 +21,18 @@ import {
 } from 'recharts';
 
 const marketData = [
-  { name: 'TIPS', price: 0.45, change: 12.5, cap: '450M', volume: '12M', chart: [40, 42, 38, 45, 48, 44, 45] },
-  { name: 'WTPC', price: 0.45, change: 5.4, cap: '25M', volume: '1.5M', chart: [42, 43, 41, 44, 46, 45, 45] },
-  { name: 'USDC', price: 1.00, change: 0.01, cap: '35B', volume: '2.5B', chart: [100, 100, 100, 100, 100, 100, 100] },
-  { name: 'ETH', price: 3200.00, change: -2.1, cap: '380B', volume: '15B', chart: [3300, 3250, 3280, 3200, 3180, 3220, 3200] },
-  { name: 'BTC', price: 65000.00, change: 1.5, cap: '1.2T', volume: '35B', chart: [63000, 64000, 63500, 65000, 64500, 65500, 65000] },
+  { name: 'TPC', price: 0, change: 0, cap: '0', volume: '0', chart: [0, 0, 0, 0, 0, 0, 0] },
+  { name: 'WTPC', price: 0, change: 0, cap: '0', volume: '0', chart: [0, 0, 0, 0, 0, 0, 0] },
+  { name: 'USDTC', price: 0, change: 0, cap: '0', volume: '0', chart: [0, 0, 0, 0, 0, 0, 0] },
 ];
 
-import { TPCCoin, USDCCoin, WTPCCoin, TetherCoin } from './Icons';
+import { TPCCoin, USDTCoin, WTPCCoin, TetherCoin } from './Icons';
 
 const TokenIcon = ({ symbol }: { symbol: string }) => {
   switch (symbol) {
-    case 'TIPS': return <TPCCoin className="w-full h-full" />;
-    case 'USDC': return <USDCCoin className="w-full h-full" />;
+    case 'TPC': return <TPCCoin className="w-full h-full" />;
+    case 'USDTC': return <USDTCoin className="w-full h-full" />;
     case 'WTPC': return <WTPCCoin className="w-full h-full" />;
-    case 'ETH': return <div className="text-xl">💠</div>;
-    case 'BNB': return <div className="text-xl">🟡</div>;
-    case 'BTC': return <div className="text-xl">🟠</div>;
-    case 'SOL': return <div className="text-xl">☀️</div>;
     default: return <div className="text-xl">💰</div>;
   }
 };

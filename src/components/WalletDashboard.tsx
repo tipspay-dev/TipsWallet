@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import * as React from 'react';
 import { 
   Plus, 
   ArrowUpRight, 
@@ -7,7 +8,12 @@ import {
   MoreHorizontal,
   Copy,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  ArrowLeftRight,
+  Clock,
+  CheckCircle2,
+  XCircle,
+  Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,27 +21,73 @@ import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Token } from '@/src/types';
 import { NETWORK_CONFIG } from '@/src/config';
+import { useTransactions, Transaction } from '../context/TransactionContext';
 
-import { TPCCoin, USDCCoin, WTPCCoin, TetherCoin } from './Icons';
+import { TPCCoin, USDTCoin, WTPCCoin, TetherCoin } from './Icons';
 
 const mockTokens: Token[] = [
-  { id: '1', symbol: 'TIPS', name: 'TipsChain', balance: 12500.50, price: 0.45, change24h: 12.5, icon: 'tips', color: 'primary' },
-  { id: '2', symbol: 'WTPC', name: 'Wrapped TPC', balance: 45.2, price: 0.45, change24h: 5.4, icon: 'wtpc', color: 'purple-400' },
-  { id: '3', symbol: 'USDC', name: 'USDC (Stable)', balance: 500.00, price: 1.00, change24h: 0.01, icon: 'usdc', color: 'green-500' },
-  { id: '4', symbol: 'ETH', name: 'Ethereum', balance: 1.25, price: 3200.00, change24h: -2.1, icon: 'eth', color: 'blue-500' },
+  { id: '1', symbol: 'TPC', name: 'Tipscoin', balance: 1250.00, price: 0.45, change24h: 5.2, icon: 'tpc', color: 'primary' },
+  { id: '2', symbol: 'WTPC', name: 'Wrapped TPC', balance: 0, price: 0.45, change24h: 0, icon: 'wtpc', color: 'purple-400' },
+  { id: '3', symbol: 'USDTC', name: 'USDTips', balance: 500.00, price: 1.00, change24h: 0, icon: 'usdc', color: 'green-500' },
 ];
 
 const TokenIcon = ({ symbol }: { symbol: string }) => {
   switch (symbol) {
-    case 'TIPS': return <TPCCoin className="w-full h-full" />;
-    case 'USDC': return <USDCCoin className="w-full h-full" />;
+    case 'TPC': return <TPCCoin className="w-full h-full" />;
+    case 'USDTC': return <USDTCoin className="w-full h-full" />;
     case 'WTPC': return <WTPCCoin className="w-full h-full" />;
-    case 'ETH': return <div className="text-2xl">💠</div>;
     default: return <div className="text-2xl">💰</div>;
   }
 };
 
+const TransactionItem: React.FC<{ tx: Transaction }> = ({ tx }) => {
+  const getIcon = () => {
+    switch (tx.type) {
+      case 'send': return <ArrowUpRight className="w-5 h-5 text-red-400" />;
+      case 'receive': return <ArrowDownLeft className="w-5 h-5 text-secondary" />;
+      case 'swap': return <ArrowLeftRight className="w-5 h-5 text-primary" />;
+    }
+  };
+
+  const getStatusIcon = () => {
+    switch (tx.status) {
+      case 'completed': return <CheckCircle2 className="w-3 h-3 text-secondary" />;
+      case 'failed': return <XCircle className="w-3 h-3 text-red-400" />;
+      case 'pending': return <Loader2 className="w-3 h-3 text-primary animate-spin" />;
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-between py-4 group">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+          {getIcon()}
+        </div>
+        <div>
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-bold capitalize">{tx.type} {tx.token}</p>
+            {getStatusIcon()}
+          </div>
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
+            <Clock className="w-3 h-3" />
+            {new Date(tx.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </p>
+        </div>
+      </div>
+      <div className="text-right">
+        <p className={`text-sm font-bold ${tx.type === 'receive' ? 'text-secondary' : 'text-white'}`}>
+          {tx.type === 'receive' ? '+' : '-'}{tx.amount}
+        </p>
+        <p className="text-[10px] font-mono text-muted-foreground opacity-50 truncate w-20 ml-auto">
+          {tx.hash?.substring(0, 10)}...
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default function WalletDashboard() {
+  const { transactions } = useTransactions();
   const totalBalance = mockTokens.reduce((acc, token) => acc + (token.balance * token.price), 0);
 
   return (
@@ -78,10 +130,6 @@ export default function WalletDashboard() {
           <Button variant="outline" className="rounded-2xl h-14 px-6 border-white/10 hover:bg-white/5 gap-2">
             <ArrowDownLeft className="w-5 h-5" />
             Receive
-          </Button>
-          <Button variant="outline" className="rounded-2xl h-14 px-6 border-white/10 hover:bg-white/5 gap-2">
-            <RefreshCw className="w-5 h-5" />
-            Swap
           </Button>
         </div>
       </div>
@@ -132,7 +180,7 @@ export default function WalletDashboard() {
               <CardTitle className="text-lg">TipsBridge</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground mb-6">Move your assets to TipsChain L1 instantly with zero fees.</p>
+              <p className="text-sm text-muted-foreground mb-6">Move your assets to Tipschain L1 instantly with zero fees.</p>
               <Button className="w-full rounded-xl bg-white text-black hover:bg-white/90 font-bold">
                 Bridge Now
               </Button>
@@ -142,28 +190,33 @@ export default function WalletDashboard() {
           {/* Recent Activity */}
           <Card className="glass-panel border-none rounded-3xl">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-lg">Activity</CardTitle>
+              <CardTitle className="text-lg">Transaction History</CardTitle>
               <MoreHorizontal className="w-5 h-5 text-muted-foreground" />
             </CardHeader>
-            <CardContent className="space-y-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                      <ArrowDownLeft className="w-5 h-5 text-secondary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold">Received TIPS</p>
-                      <p className="text-xs text-muted-foreground">2 mins ago</p>
-                    </div>
+            <CardContent>
+              <ScrollArea className="h-[300px] pr-4">
+                {transactions.length > 0 ? (
+                  <div className="divide-y divide-white/5">
+                    {transactions.map((tx) => (
+                      <TransactionItem key={tx.id} tx={tx} />
+                    ))}
                   </div>
-                  <p className="text-sm font-bold text-secondary">+500.00</p>
-                </div>
-              ))}
-              <Button variant="ghost" className="w-full text-muted-foreground hover:text-white gap-2">
-                View History
-                <ChevronRight className="w-4 h-4" />
-              </Button>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                      <RefreshCw className="w-6 h-6 text-muted-foreground/30" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">No transactions yet.</p>
+                    <p className="text-xs text-muted-foreground/50 mt-1">Swaps on DEX will appear here.</p>
+                  </div>
+                )}
+              </ScrollArea>
+              {transactions.length > 0 && (
+                <Button variant="ghost" className="w-full mt-4 text-muted-foreground hover:text-white gap-2">
+                  View Full History
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              )}
             </CardContent>
           </Card>
         </div>

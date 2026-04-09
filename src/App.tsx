@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar';
 import LandingPage from './components/LandingPage';
 import Onboarding from './components/Onboarding';
 import { ThemeProvider } from './components/ThemeProvider';
+import { TransactionProvider } from './context/TransactionContext';
 
 type AppView = 'landing' | 'onboarding' | 'loading' | 'main';
 
@@ -43,7 +44,8 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
+      <TransactionProvider>
+        <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
         <AnimatePresence mode="wait">
           {view === 'landing' && (
             <motion.div 
@@ -103,6 +105,7 @@ export default function App() {
           )}
         </AnimatePresence>
       </div>
+      </TransactionProvider>
     </ThemeProvider>
   );
 }

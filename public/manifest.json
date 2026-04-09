@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "TipsWallet Extension",
+  "name": "Tipspay Wallet Extension",
   "version": "1.0.0",
-  "description": "Advanced Web3 Crypto Wallet & DEX for the TipsChain ecosystem.",
+  "description": "Advanced Web3 Crypto Wallet & DEX for the Tipschain ecosystem.",
   "action": {
     "default_popup": "index.html",
     "default_icon": {

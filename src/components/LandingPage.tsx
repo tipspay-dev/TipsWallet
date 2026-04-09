@@ -11,7 +11,7 @@ import {
   Layers
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { TipsChainLogo, TipsPayWalletLogo } from './Icons';
+import { TipschainLogo, TipspayWalletLogo } from './Icons';
 
 interface LandingPageProps {
   onEnter: () => void;
@@ -36,7 +36,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
           >
             <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-muted-foreground">TipsChain Mainnet is Live</span>
+            <span className="text-sm font-medium text-muted-foreground">Tipschain Mainnet is Live</span>
           </motion.div>
 
           <motion.h1
@@ -87,7 +87,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
         </div>
       </section>
 
-      {/* TipsChain Section */}
+      {/* Tipschain Section */}
       <section className="py-24 px-4 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -98,13 +98,13 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
               transition={{ duration: 0.8 }}
             >
               <div className="mb-6">
-                <TipsChainLogo className="h-12 w-auto text-foreground" />
+                <TipschainLogo className="h-12 w-auto text-foreground" />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                Powered by <span className="text-secondary neon-text-green">TipsChain</span>
+                Powered by <span className="text-secondary neon-text-green">Tipschain</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                TipsChain is a high-performance Layer 1 blockchain designed for mass adoption. 
+                Tipschain is a high-performance Layer 1 blockchain designed for mass adoption. 
                 With sub-second finality and near-zero fees, it's the perfect foundation for the next generation of Web3 apps.
               </p>
               <div className="grid grid-cols-2 gap-6">
@@ -148,7 +148,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
         </div>
       </section>
 
-      {/* TipsPay Section */}
+      {/* Tipspay Section */}
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -158,7 +158,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
               viewport={{ once: true }}
               className="mb-6 flex justify-center"
             >
-              <TipsPayWalletLogo className="h-12 w-auto text-foreground" />
+              <TipspayWalletLogo className="h-12 w-auto text-foreground" />
             </motion.div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">
               Your Gateway to the <span className="text-primary neon-text-purple">Tipschain Ecosystem</span>
@@ -167,7 +167,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
               The Ultimate Wallet by <span className="text-primary neon-text-purple">Tipspay</span>
             </h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              The ultimate non-custodial wallet for the TipsChain ecosystem. 
+              The ultimate non-custodial wallet for the Tipschain ecosystem. 
               Manage your assets, swap tokens, and explore dApps with ease.
             </p>
           </div>
@@ -218,7 +218,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
       <footer className="py-12 px-4 border-t border-white/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
-            <TipsPayWalletLogo className="h-8 w-auto text-foreground" />
+            <TipspayWalletLogo className="h-8 w-auto text-foreground" />
           </div>
           <div className="flex gap-8 text-sm text-muted-foreground">
             <a href="#" className="hover:text-white transition-colors">Twitter</a>

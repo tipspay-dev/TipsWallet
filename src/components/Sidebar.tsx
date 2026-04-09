@@ -27,7 +27,7 @@ const navItems = [
   { id: 'market', label: 'Market', icon: TrendingUp },
 ];
 
-import { TipsPayWalletLogo } from './Icons';
+import { TipspayWalletLogo } from './Icons';
 import { NETWORK_CONFIG } from '@/src/config';
 
 export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
@@ -36,7 +36,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
   return (
     <aside className="w-20 md:w-64 border-r border-white/5 bg-black/40 backdrop-blur-xl flex flex-col h-full z-40">
       <div className="p-6 flex items-center gap-3 text-white" style={{ fontSize: '12px', textAlign: 'justify', lineHeight: '22px' }}>
-        <TipsPayWalletLogo className="w-full h-auto" />
+        <TipspayWalletLogo className="w-full h-auto" />
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-2">
@@ -102,7 +102,7 @@ export default function Sidebar({ activeTab, setActiveTab }: SidebarProps) {
           <p className="text-xs text-muted-foreground mb-2">Network Status</p>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-secondary rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-            <span className="text-sm font-medium">TipsChain ({NETWORK_CONFIG.chainId})</span>
+            <span className="text-sm font-medium">Tipschain ({NETWORK_CONFIG.chainId})</span>
           </div>
         </div>
         
