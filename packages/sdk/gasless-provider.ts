@@ -46,7 +46,7 @@ export const resolveTipsName = async (
   const REGISTRY_SELECTOR = "0x5c383fae";
 
   try {
-    const nameWithoutSuffix = tipsName.replace(".tips", "");
+    const nameWithoutSuffix = tipsName.slice(0, -5);
     const encodedName = encodeStringParam(nameWithoutSuffix);
 
     const response = await fetch(rpcUrl, {

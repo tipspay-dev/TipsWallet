@@ -84,7 +84,7 @@ const DEX_ROUTERS: Record<number, DexConfig[]> = {
     {
       name: "Trader Joe",
       routerAddress: "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
-      factoryAddress: "0x9Ad6C38BE94206cA50bb0d90783181834C914dB",
+      factoryAddress: "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10",
       chainId: 43114,
       fee: 30,
     },
@@ -102,7 +102,7 @@ const DEX_ROUTERS: Record<number, DexConfig[]> = {
     {
       name: "Velodrome",
       routerAddress: "0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858",
-      factoryAddress: "0x25CbdDb98b35ab1FF77cfWc1c33A0b35b5e19E3E",
+      factoryAddress: "0xF1046053aa5682b4F9a81b5481394DA16BE5FF5a",
       chainId: 10,
       fee: 30,
     },

@@ -54,6 +54,11 @@ contract SocialNameServer {
         reverseRegistry[msg.sender] = _name;
         registrationTime[_name] = block.timestamp;
 
+        // Refund excess payment
+        if (msg.value > registrationFee) {
+            payable(msg.sender).transfer(msg.value - registrationFee);
+        }
+
         emit NameRegistered(_name, msg.sender);
     }
 
