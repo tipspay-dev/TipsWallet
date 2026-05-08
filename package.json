@@ -1,0 +1,37 @@
+{
+  "name": "tipswallet",
+  "version": "1.0.0",
+  "description": "TipsWallet & TIPSPAY - Multichain EVM Wallet & DEX (tipspay.org/wallet, tipspay.org/dex)",
+  "private": true,
+  "scripts": {
+    "build": "npx webpack",
+    "lint": "echo 'No linter configured yet'",
+    "typecheck": "npx tsc --noEmit"
+  },
+  "keywords": [
+    "wallet",
+    "dex",
+    "evm",
+    "multichain",
+    "tipschain",
+    "ethereum",
+    "polygon",
+    "bsc",
+    "avalanche",
+    "arbitrum",
+    "optimism",
+    "base"
+  ],
+  "author": "TIPSPAY",
+  "license": "MIT",
+  "homepage": "https://tipspay.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tipspay-dev/TipsWallet.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
+  }
+}
