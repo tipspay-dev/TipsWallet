@@ -55,6 +55,46 @@ const NATIVE_TOKEN_ICONS: Record<number, string> = {
   25: "https://assets.coingecko.com/coins/images/7310/small/cro_token_logo.png",
 };
 
+// TipsChain registered tokens (Chain ID: 19251925)
+const TIPSCHAIN_REGISTERED_TOKENS: TokenInfo[] = [
+  {
+    address: "0x0000000000000000000000000000000000000001",
+    chainId: 19251925,
+    name: "USD Coin TipsChain",
+    symbol: "USCT",
+    decimals: 18,
+    logoURI: "https://tipspay.org/assets/icons/tokens/usct.png",
+    tags: ["stablecoin"],
+  },
+  {
+    address: "0x0000000000000000000000000000000000000002",
+    chainId: 19251925,
+    name: "Tether USD",
+    symbol: "USDT",
+    decimals: 18,
+    logoURI: "https://tipspay.org/assets/icons/tokens/usdt.png",
+    tags: ["stablecoin"],
+  },
+  {
+    address: "0x0000000000000000000000000000000000000003",
+    chainId: 19251925,
+    name: "Wrapped TIPS Coin",
+    symbol: "WTPC",
+    decimals: 18,
+    logoURI: "https://tipspay.org/assets/icons/tokens/wtpc.png",
+    tags: ["wrapped"],
+  },
+  {
+    address: "0x0000000000000000000000000000000000000004",
+    chainId: 19251925,
+    name: "USD Coin",
+    symbol: "USDC",
+    decimals: 18,
+    logoURI: "https://tipspay.org/assets/icons/tokens/usdc.png",
+    tags: ["stablecoin"],
+  },
+];
+
 // In-memory cache for token lists
 const tokenListCache: Map<number, TokenInfo[]> = new Map();
 
@@ -69,6 +109,12 @@ export async function fetchTokenList(chainId: number): Promise<TokenInfo[]> {
   const network = getNetworkByChainId(chainId);
   if (!network || !network.tokenListUrl) {
     return [];
+  }
+
+  // TipsChain uses built-in registered tokens
+  if (chainId === 19251925) {
+    tokenListCache.set(chainId, TIPSCHAIN_REGISTERED_TOKENS);
+    return TIPSCHAIN_REGISTERED_TOKENS;
   }
 
   try {
