@@ -4,6 +4,7 @@
 import { EVM_NETWORKS, NetworkConfig, getNetworkByChainId } from "./networks";
 import { resolveTokenIcon, fetchTokenList, TokenInfo } from "./token-registry";
 import { MultichainProvider } from "./multichain-provider";
+import { getExplorerBaseUrl, getTransactionUrl, getAddressUrl } from "./explorer";
 
 export interface WalletAccount {
   address: string;
@@ -16,6 +17,7 @@ export interface WalletTokenBalance {
   balance: string;
   chainId: number;
   iconUrl: string;
+  explorerUrl: string;
 }
 
 export const generateMnemonic = (): string => {
@@ -42,6 +44,7 @@ export const getWalletTokens = async (
 
   // Add native token as first entry
   const nativeIcon = await resolveTokenIcon(chainId);
+  const explorerBase = getExplorerBaseUrl(chainId) || "";
   const balances: WalletTokenBalance[] = [
     {
       token: {
@@ -55,6 +58,7 @@ export const getWalletTokens = async (
       balance: "0",
       chainId,
       iconUrl: nativeIcon,
+      explorerUrl: explorerBase ? `${explorerBase}/address/${address}` : "",
     },
   ];
 
@@ -66,6 +70,7 @@ export const getWalletTokens = async (
       balance: "0",
       chainId,
       iconUrl,
+      explorerUrl: explorerBase ? `${explorerBase}/token/${token.address}` : "",
     });
   }
 

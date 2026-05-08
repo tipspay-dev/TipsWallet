@@ -28,7 +28,7 @@ export const EVM_NETWORKS: Record<string, NetworkConfig> = {
       decimals: 18,
     },
     rpcUrls: ["https://rpc.tipschain.org"],
-    blockExplorerUrls: ["https://explorer.tipschain.org"],
+    blockExplorerUrls: ["https://tipschain.online"],
     iconUrl: "https://tipspay.org/assets/icons/tipschain.png",
     isTestnet: false,
     tokenListUrl: "https://rpc.tipschain.org/tokenlist.json",
