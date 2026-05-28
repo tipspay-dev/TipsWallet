@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120" fill="none">
+  <defs>
+    <linearGradient id="lg1" x1="30" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="50%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="lg2" x1="40" y1="20" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="txt" x1="100" y1="40" x2="250" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(10, 10)">
+    <rect x="10" y="5" width="80" height="80" rx="16" stroke="url(#lg1)" stroke-width="2.5" fill="rgba(124,58,237,0.08)"/>
+    <path d="M30 30h40v6H54v28h-8V36H30v-6z" fill="url(#lg2)"/>
+    <circle cx="72" cy="22" r="5" fill="#22d3ee" opacity="0.7"/>
+    <circle cx="28" cy="68" r="4" fill="#a855f7" opacity="0.5"/>
+    <circle cx="76" cy="62" r="3" fill="#facc15" opacity="0.6"/>
+  </g>
+  <!-- Text -->
+  <text x="110" y="68" font-family="'Segoe UI', system-ui, sans-serif" font-size="36" font-weight="800" fill="url(#txt)">Tipspay</text>
+  <text x="110" y="88" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" font-weight="500" fill="#64748b" letter-spacing="3">POWERED BY TIPSCHAIN</text>
+</svg>
